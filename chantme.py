@@ -13,15 +13,16 @@ def main():
     parser.add_argument("--input", "-i", type=str, required=True)
     args = parser.parse_args()
     user_input = args.input
-    chat_history = []
-    while user_input != "":
-        generate_chant(user_input, chat_history, SYSTEM_MESSAGE)
-        user_input = input()
-        if not validate_input_length(user_input):
-            raise ValueError(f'You write is too long. Must be under {MAX_INPUT_LENGTH}.')
+    generate_chant_davinci(user_input)
+    # chat_history = []
+    # while user_input != "":
+    #     generate_chant_gpt35(user_input, chat_history, SYSTEM_MESSAGE)
+    #     user_input = input()
+    #     validate_input_length(user_input)
 
 
-def generate_chant(prompt: str, chat_history: list, system_message: str):
+# This model allow hold of context of previous user requests
+def generate_chant_gpt35(prompt: str, chat_history: list, system_message: str):
     full_prompt = f"Generate chant for the {prompt} football team playing against football club Real Madrid"
     openai.api_key = os.getenv("OPENAI_API_KEY")
     user_prompt = {'role': 'user', 'content': full_prompt}
@@ -42,8 +43,20 @@ def generate_chant(prompt: str, chat_history: list, system_message: str):
     print(response)
 
 
-def validate_input_length(user_input: str) -> bool:
-    return len(user_input) <= MAX_INPUT_LENGTH
+def generate_chant_davinci(prompt: str) -> str:
+    validate_input_length(prompt)
+    openai.api_key = os.getenv("OPENAI_API_KEY")
+    full_prompt = f"Generate four lines chant for the football team {prompt} fans playing against football club Real Madrid"
+    response = openai.Completion.create(model="text-davinci-003", prompt=full_prompt, max_tokens=100)
+    content = response["choices"][0]["text"].strip()
+    print(content)
+    print(response)
+    return content
+
+
+def validate_input_length(user_input: str) -> None:
+    if len(user_input) > MAX_INPUT_LENGTH:
+        raise ValueError(f'You write is too long. Must be under {MAX_INPUT_LENGTH}.')
 
 
 if __name__ == "__main__":
