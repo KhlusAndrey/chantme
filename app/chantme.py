@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 import argparse
 
 load_dotenv()
-SYSTEM_MESSAGE = "Answer the user with short, concise answers. Keep it in the point and don't go off-topic."
+SYSTEM_MESSAGE = "Keep it in the point and don't go off-topic."
 MAX_INPUT_LENGTH = 20
 
 
@@ -13,16 +13,16 @@ def main():
     parser.add_argument("--input", "-i", type=str, required=True)
     args = parser.parse_args()
     user_input = args.input
-    generate_chant_davinci(user_input)
-    # chat_history = []
-    # while user_input != "":
-    #     generate_chant_gpt35(user_input, chat_history, SYSTEM_MESSAGE)
-    #     user_input = input()
-    #     validate_input_length(user_input)
+    # generate_chant_davinci(user_input)
+    chat_history = []
+    while user_input != "":
+        generate_chant_gpt35(user_input, chat_history, SYSTEM_MESSAGE)
+        user_input = input()
+        validate_input_length(user_input)
 
 
 # This model allow hold of context of previous user requests
-def generate_chant_gpt35(prompt: str, chat_history: list, system_message: str):
+def generate_chant_gpt35(prompt: str, chat_history: list, system_message: str | None = None):
     full_prompt = f"Generate chant for the {prompt} football team playing against football club Real Madrid"
     openai.api_key = os.getenv("OPENAI_API_KEY")
     user_prompt = {'role': 'user', 'content': full_prompt}
@@ -39,14 +39,15 @@ def generate_chant_gpt35(prompt: str, chat_history: list, system_message: str):
     content = response["choices"][0]["message"]["content"].strip()
     chat_history.append(user_prompt)
     chat_history.append({"role": "assistant", "content": content})
-
+    print(content)
     print(response)
+    return content
 
 
 def generate_chant_davinci(prompt: str) -> str:
     validate_input_length(prompt)
     openai.api_key = os.getenv("OPENAI_API_KEY")
-    full_prompt = f"Generate four lines chant for the football team {prompt} fans playing against football club Real Madrid"
+    full_prompt = f"Generate competitive chant for the football team {prompt} fans playing against football club Real Madrid"
     response = openai.Completion.create(model="text-davinci-003", prompt=full_prompt, max_tokens=100)
     content = response["choices"][0]["text"].strip()
     print(content)
