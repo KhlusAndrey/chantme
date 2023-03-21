@@ -1,0 +1,4 @@
+fastapi
+openai
+mangum==0.17.0
+requests
