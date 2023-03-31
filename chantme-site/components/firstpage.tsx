@@ -15,7 +15,7 @@ const FirstPage: React.FC<FirstPageProps> = (props) => {
         className="bg-gradient-to-r from-teal-400 to-green-500 p-2 disabled:opacity-50 w-full rounded-md text-lg mt-6"
         onClick={props.onStart}
          >
-            Let's start
+            Let&apos;s start
         </button>
     </>
 }

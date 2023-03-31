@@ -1,10 +1,10 @@
 import os
 import openai
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 import argparse
 
 
-load_dotenv()
+# load_dotenv()
 SYSTEM_MESSAGE = "Keep it in the point and don't go off-topic."
 MAX_INPUT_LENGTH = 20
 
