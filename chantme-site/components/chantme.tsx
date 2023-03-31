@@ -66,7 +66,7 @@ const Chantme: React.FC = () => {
         <div className="max-w-md m-auto p-2">
             <div className="bg-emerald-900 p-6 rounded-md text-white">
             <div className="text-center my-6">
-                <Image src={logo} width={82} height={82} alt={"logo"} className="mx-auto rounded-lg"/>
+                <Image src={`require${logo}`} width={82} height={82} alt={"logo"} className="mx-auto rounded-lg"/>
             <h1 className={gradientTextStyle + " text-4xl font-ligth"}>ChantMe</h1>  
             <div className={gradientTextStyle}>
             Your AI chant assistent.
