@@ -3,6 +3,7 @@ import openai
 from dotenv import load_dotenv
 import argparse
 
+
 load_dotenv()
 SYSTEM_MESSAGE = "Keep it in the point and don't go off-topic."
 MAX_INPUT_LENGTH = 20
@@ -22,9 +23,11 @@ def main():
 
 
 # This model allow hold of context of previous user requests
-def generate_chant_gpt35(prompt: str, chat_history: list, system_message: str | None = None):
-    full_prompt = f"Generate chant for the {prompt} football team playing against football club Real Madrid"
-    openai.api_key = os.getenv("OPENAI_API_KEY")
+def generate_chant_gpt35(prompt: str, chat_history: list, system_message: str = None):
+    first_team, second_team = prompt.split('%') # We get two teams names from frontend devided by '%'
+    full_prompt = f"Generate chant for the {first_team} football team playing against other football club {second_team}. If possible using {first_team} country language, or English"
+    print(full_prompt)
+    # openai.api_key = os.getenv("OPENAI_API_KEY")
     user_prompt = {'role': 'user', 'content': full_prompt}
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",

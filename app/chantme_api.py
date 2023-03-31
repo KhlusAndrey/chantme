@@ -1,6 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from chantme import generate_chant_gpt35
 from mangum import Mangum
+from fastapi.middleware.cors import CORSMiddleware
 
 
 app = FastAPI()
@@ -9,6 +10,13 @@ handler = Mangum(app)
 SYSTEM_MESSAGE = "Keep it in the point and don't go off-topic."
 MAX_LENGTH = 32
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/generate_chant")
 async def generate_chant_api(prompt: str):

@@ -1,16 +1,23 @@
 interface ResultsProps {
     chant: string;
     onBack: any;
-    prompt: string;
+    promptFirstTeam: string;
+    promptSecondTeam: string;
 }
 
 const Results: React.FC<ResultsProps> = (props) => {
     return <>
         <div>
-            <div><b>Here is chant for your team {props.prompt}:</b></div>
-            <div>{props.chant}</div>
+            <div className="bg-gradient-to-r from-teal-400 to-green-500 rounded-md my-2 p-2">Here is chant for your team {props.promptFirstTeam} playing against {props.promptSecondTeam}:</div>
+            <div className="bg-gradient-to-r from-teal-400 to-green-500 rounded-md my-2 p-2">{props.chant}</div>
         </div>
-        <button onClick={props.onBack}>Back</button>
+
+        <button
+        className="bg-gradient-to-r from-teal-400 to-green-500 p-2 disabled:opacity-50 w-full rounded-md text-lg mt-6"
+        onClick={props.onBack}
+         >
+            Back
+        </button>
     </>
 }
 
