@@ -6,6 +6,7 @@ const FirstPage: React.FC<FirstPageProps> = (props) => {
     return <>
         <div>
             <div className="bg-gradient-to-r from-teal-400 to-green-500 rounded-md my-2 p-2">Here is first page the ChantMe app </div>
+            <div className="bg-gradient-to-r from-teal-400 to-green-500 rounded-md my-2 p-2"> TODO: About </div>
             <div className="bg-gradient-to-r from-teal-400 to-green-500 rounded-md my-2 p-2"> TODO: Add users statment and agreement </div>
 
            
