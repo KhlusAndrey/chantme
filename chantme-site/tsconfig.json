@@ -18,6 +18,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "./chantme-site/index.d.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "./index.d.ts"],
   "exclude": ["node_modules"]
 }
