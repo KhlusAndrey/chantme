@@ -3,7 +3,6 @@ import Form from "./form";
 import Results from "./results";
 import FirstPage from "./firstpage";
 import Image from "next/image";
-// import logo from "../public/logo.svg";
 
 
 const Chantme: React.FC = () => {
@@ -20,7 +19,7 @@ const Chantme: React.FC = () => {
     const onSubmit = () => {
         console.log("Submitting:" + promptFirstTeam, promptSecondTeam)
         setIsLoading(true)
-        fetch(`${ENDPOINT}?prompt=${promptFirstTeam}%${promptSecondTeam}`)
+        fetch(`${ENDPOINT}?prompt=${promptFirstTeam},${promptSecondTeam}`)
             .then((res) => res.json())
             .then(onResult)
     };
@@ -51,7 +50,7 @@ const Chantme: React.FC = () => {
     if (firstTimeVisit) {
         displayElement = <FirstPage onStart={onStart} />
     };
-    
+
     if (hasResult) {
         displayElement = <Results chant={chant} onBack={onReset} promptFirstTeam={promptFirstTeam} promptSecondTeam={promptSecondTeam} />
     } else if (!firstTimeVisit) {

@@ -24,10 +24,9 @@ def main():
 
 # This model allow hold of context of previous user requests
 def generate_chant_gpt35(prompt: str, chat_history: list, system_message: str = None):
-    first_team, second_team = prompt.split('%') # We get two teams names from frontend devided by '%'
+    first_team, second_team = prompt.split(',') # We get two teams names from frontend devided by ','
     full_prompt = f"Generate chant for the {first_team} football team playing against other football club {second_team}. If possible using {first_team} country language, or English"
-    print(full_prompt)
-    # openai.api_key = os.getenv("OPENAI_API_KEY")
+    openai.api_key = os.getenv("OPENAI_API_KEY")
     user_prompt = {'role': 'user', 'content': full_prompt}
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
@@ -42,8 +41,8 @@ def generate_chant_gpt35(prompt: str, chat_history: list, system_message: str = 
     content = response["choices"][0]["message"]["content"].strip()
     chat_history.append(user_prompt)
     chat_history.append({"role": "assistant", "content": content})
-    print(content)
-    print(response)
+    # print(content)
+    # print(response)
     return content
 
 
