@@ -41,8 +41,8 @@ def generate_chant_gpt35(prompt: str, chat_history: list, system_message: str = 
     content = response["choices"][0]["message"]["content"].strip()
     chat_history.append(user_prompt)
     chat_history.append({"role": "assistant", "content": content})
-    # print(content)
-    # print(response)
+    print(content)
+    print(response)
     return content
 
 

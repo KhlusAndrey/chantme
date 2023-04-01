@@ -8,7 +8,7 @@ app = FastAPI()
 handler = Mangum(app)
 
 SYSTEM_MESSAGE = "Keep it in the point and don't go off-topic."
-MAX_LENGTH = 32
+MAX_LENGTH = 65
 
 app.add_middleware(
     CORSMiddleware,
