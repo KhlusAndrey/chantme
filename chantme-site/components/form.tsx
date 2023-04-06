@@ -2,15 +2,16 @@ interface FormProps {
     promptFirstTeam: string;
     setPromptFirstTeam: any;
     promptSecondTeam: string;
-    setpromptSecondTeam: any;
+    setPromptSecondTeam: any;
     onSubmit: any;
     characterLimit: number;
-    isLoading: boolean;
+    isLoading: boolean;    
 }
 
 const Form: React.FC<FormProps> = (props) => {
     const isPromptVlidFirst = props.promptFirstTeam.length < props.characterLimit
     const isPromptVlidSecond = props.promptSecondTeam.length < props.characterLimit
+    
     const updatePromptValue = (text: string) => {
         if (text.length <= props.characterLimit) {
             props.setPromptFirstTeam(text)
@@ -18,10 +19,10 @@ const Form: React.FC<FormProps> = (props) => {
     };
     const updatePromptValueSecond = (text: string) => {
         if (text.length <= props.characterLimit) {
-            props.setpromptSecondTeam(text)
+            props.setPromptSecondTeam(text)
         };
     };
-
+    
     const InputStyle = "p-2 w-full rounded-md focus:outline-teal-500 focus:outline text-slate-800";
 
     let statusColorFirst = "text-slate-400 text-sm" 
@@ -48,18 +49,16 @@ const Form: React.FC<FormProps> = (props) => {
             placeholder="FC Real Madrid"
             value={props.promptFirstTeam}
             onChange={(e) => updatePromptValue(e.currentTarget.value)}
+            required
         ></input>
 
             <div className= {statusColorFirst + " flex justify-between mb-2"}>
                 <div>{statusTextFirst}</div>
                 <div>
                     {props.promptFirstTeam.length}/{props.characterLimit}
-                </div>
-                    
-                
+                </div>                
             </div>
             
-
         <div className="flex justify-center mt-1 mb-4">
             <p className="text-slate-300 text-xl text-justify">VS</p>
         </div>
@@ -70,7 +69,7 @@ const Form: React.FC<FormProps> = (props) => {
             placeholder="FC Barcelona"
             value={props.promptSecondTeam}
             onChange={(e) => updatePromptValueSecond(e.currentTarget.value)}
-    
+            required
         ></input>
         
         <div className= {statusColorSecond + " flex justify-between mt-2 mb-6"}>
@@ -78,13 +77,12 @@ const Form: React.FC<FormProps> = (props) => {
                 <div>
                     {props.promptSecondTeam.length}/{props.characterLimit}
                 </div>
-                    
-                
         </div>
+        
         <button 
         className="bg-gradient-to-r from-teal-400 to-green-500 p-2 disabled:opacity-50 w-full rounded-md text-lg"
         onClick={props.onSubmit} 
-        disabled={!isPromptVlidFirst || props.isLoading}
+        disabled={!isPromptVlidFirst || props.isLoading }
         >
             Generate Chant
         </button>
